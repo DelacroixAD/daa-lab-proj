@@ -1,0 +1,623 @@
+/* ==========================================================================
+   EXAM TIMETABLE SCHEDULER - NEO-BRUTALIST DESIGN SYSTEM
+   - Pure White #FFFFFF background
+   - Bold 3px solid #000 borders on every card, section, button, and table
+   - Black and oversized typography (Hero headline at 80px, font-weight 900)
+   - Accent color Yellow #FFE600 for hover states and highlighted sections
+   - Slight rotation (transform: rotate(-1deg) to -2deg) on cards
+   - Monospace font for all body text
+   - NO gradients, NO drop shadows, NO border-radius anywhere
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800;900&display=swap');
+
+:root {
+    --bg: #FFFFFF;
+    --text: #000000;
+    --border: 3px solid #000000;
+    --border-light: 2px solid #000000;
+    --accent: #FFE600;
+    --font-heading: 'Syne', 'Arial Black', -apple-system, sans-serif;
+    --font-mono: 'Space Mono', 'Courier New', monospace;
+}
+
+/* Global Reset: NO BORDER-RADIUS, NO SHADOWS, NO GRADIENTS */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+html {
+    background-color: var(--bg);
+    color: var(--text);
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 16px;
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   TICKER BANNER
+   ========================================================================= */
+.brutalist-ticker {
+    background-color: var(--accent);
+    border-bottom: var(--border);
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+}
+
+.ticker-track {
+    display: inline-flex;
+    animation: brutalistTicker 24s linear infinite;
+}
+
+.ticker-track span {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0 32px;
+}
+
+@keyframes brutalistTicker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   LAYOUT & CONTAINERS
+   ========================================================================== */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px 100px 32px;
+}
+
+.section {
+    border-bottom: var(--border);
+    padding: 70px 0;
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.hero {
+    padding-top: 80px;
+    padding-bottom: 60px;
+}
+
+.hero-tag {
+    display: inline-block;
+    background: #000000;
+    color: #FFFFFF;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 24px;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 24px;
+}
+
+.hero-title mark {
+    background-color: var(--accent);
+    color: #000000;
+    padding: 0 8px;
+    display: inline-block;
+}
+
+.hero-caption {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    color: #000000;
+    max-width: 760px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.hero-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.hero-nav a {
+    color: #000000;
+    background-color: #FFFFFF;
+    border: var(--border);
+    padding: 8px 18px;
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.hero-nav a:hover {
+    background-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   ALGORITHM IMAGE CARDS WITH ROTATION (-1deg to -2deg)
+   ========================================================================== */
+.algorithm-card-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 36px;
+    padding: 50px 0 20px 0;
+    border-bottom: var(--border);
+}
+
+.image-card {
+    background-color: #FFFFFF;
+    border: var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.2s ease, background-color 0.15s ease;
+}
+
+.rotate-neg-1 {
+    transform: rotate(-1deg);
+}
+
+.rotate-neg-2 {
+    transform: rotate(-2deg);
+}
+
+.rotate-neg-1-5 {
+    transform: rotate(-1.5deg);
+}
+
+.image-card:hover {
+    transform: rotate(0deg) scale(1.02);
+    z-index: 10;
+}
+
+.image-card:hover .card-body {
+    background-color: var(--accent);
+}
+
+.image-card-media {
+    width: 100%;
+    height: 180px;
+    border-bottom: var(--border);
+    background-color: #FAFAFA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-card-media svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.card-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: var(--accent);
+    color: #000000;
+    border: 2px solid #000000;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    text-transform: uppercase;
+}
+
+.card-body {
+    padding: 20px 24px;
+    background-color: #FFFFFF;
+    transition: background-color 0.15s ease;
+    flex: 1;
+}
+
+.card-title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.card-text {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   SECTION TITLES & HEADINGS
+   ========================================================================== */
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 44px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.section-desc {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: #444444;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.subsection-title {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: #000000;
+    margin-top: 36px;
+    margin-bottom: 12px;
+}
+
+.section-header-row,
+.subsection-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.subsection-header-row .subsection-title {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   BUTTONS & FORM CONTROLS
+   ========================================================================== */
+textarea {
+    width: 100%;
+    background-color: #FFFFFF;
+    border: var(--border);
+    padding: 18px;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: #000000;
+    outline: none;
+    resize: vertical;
+    transition: background-color 0.15s ease;
+}
+
+textarea:focus {
+    background-color: var(--accent);
+}
+
+.button-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.btn {
+    display: inline-block;
+    background: #FFFFFF;
+    color: #000000;
+    border: var(--border);
+    padding: 12px 24px;
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.btn:hover {
+    background-color: var(--accent);
+    color: #000000;
+    transform: translateY(-2px);
+}
+
+.primary-btn {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+.primary-btn:hover {
+    background-color: var(--accent);
+    color: #000000;
+}
+
+.plain-toggle-btn {
+    background: #FFFFFF;
+    border: var(--border);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+    cursor: pointer;
+    padding: 6px 16px;
+    text-transform: uppercase;
+    transition: background-color 0.15s ease;
+}
+
+.plain-toggle-btn:hover {
+    background-color: var(--accent);
+}
+
+.collapsible-content.collapsed {
+    display: none;
+}
+
+/* ==========================================================================
+   INLINE MESSAGES & WARNINGS
+   ========================================================================== */
+.inline-message {
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.inline-message .warning-item {
+    background-color: #FFFFFF;
+    border: var(--border);
+    padding: 10px 16px;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: #000000;
+    border-left: 10px solid #000000;
+}
+
+/* ==========================================================================
+   TABLES
+   ========================================================================== */
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: var(--border);
+    background: #FFFFFF;
+    margin-top: 14px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #000000;
+    color: #FFFFFF;
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 14px 18px;
+    border-bottom: var(--border);
+    border-right: 2px solid #333333;
+}
+
+th:last-child {
+    border-right: none;
+}
+
+td {
+    padding: 14px 18px;
+    border-bottom: 2px solid #000000;
+    border-right: 2px solid #E0E0E0;
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: #000000;
+}
+
+td:last-child {
+    border-right: none;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background-color: var(--accent);
+}
+
+.empty-cell {
+    color: #666666;
+    font-style: italic;
+    background: #FFFFFF !important;
+}
+
+/* Student Timetables formatting */
+.th-student-id {
+    min-width: 140px;
+    white-space: nowrap;
+}
+
+.student-schedule-wrap {
+    margin-top: 48px;
+}
+
+.student-schedule-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    align-items: baseline;
+}
+
+.student-schedule-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.student-schedule-item .slot-label {
+    font-weight: 700;
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 2px 6px;
+    font-size: 12px;
+}
+
+/* Slot-wise schedule formatting */
+.slot-schedule-wrap {
+    margin-top: 48px;
+}
+
+/* ==========================================================================
+   BRUTALIST CARDS (WITH ROTATION)
+   ========================================================================== */
+.brutalist-card {
+    background-color: #FFFFFF;
+    border: var(--border);
+    padding: 24px;
+    transition: transform 0.2s ease;
+}
+
+.brutalist-card:hover {
+    transform: rotate(0deg);
+}
+
+#graph-container {
+    width: 100%;
+    height: 650px;
+    background-color: #FFFFFF;
+    position: relative;
+}
+
+.graph-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 24px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #FFFFFF;
+    border: var(--border-light);
+    padding: 6px 12px;
+    text-transform: uppercase;
+}
+
+.legend-swatch {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #000000;
+    display: inline-block;
+}
+
+/* Validation section */
+.validation-card {
+    background-color: #FFFFFF;
+    border: var(--border);
+    padding: 28px;
+    border-left: 14px solid #000000;
+}
+
+.validation-status {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    color: #000000;
+}
+
+.validation-status.success {
+    color: #000000;
+}
+
+.validation-status.error {
+    color: #D32F2F;
+}
+
+.validation-details {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: #000000;
+}
+
+/* ==========================================================================
+   RESPONSIVE SCALING
+   ========================================================================== */
+@media (max-width: 900px) {
+    .hero-title {
+        font-size: 54px;
+    }
+    .section-title {
+        font-size: 34px;
+    }
+    #graph-container {
+        height: 480px;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-title {
+        font-size: 38px;
+    }
+    .hero-caption {
+        font-size: 16px;
+    }
+    .section {
+        padding: 44px 0;
+    }
+    .hero-nav {
+        flex-direction: column;
+    }
+    .hero-nav a {
+        text-align: center;
+    }
+    .button-bar {
+        flex-direction: column;
+    }
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+    #graph-container {
+        height: 380px;
+    }
+}

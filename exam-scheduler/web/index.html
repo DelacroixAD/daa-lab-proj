@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Timetable Scheduler // Welch-Powell</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Pin vis-network version strictly for graph rendering -->
+    <script src="https://unpkg.com/vis-network@9.1.9/dist/vis-network.min.js"></script>
+</head>
+<body>
+    <!-- Live Brutalist Ticker -->
+    <div class="brutalist-ticker">
+        <div class="ticker-track">
+            <span>// EXAM TIMETABLE SCHEDULER // WELCH-POWELL GRAPH COLORING // PURE 3PX SOLID BLACK BORDERS // ACCENT YELLOW #FFE600 // ZERO SHADOWS //</span>
+            <span>// EXAM TIMETABLE SCHEDULER // WELCH-POWELL GRAPH COLORING // PURE 3PX SOLID BLACK BORDERS // ACCENT YELLOW #FFE600 // ZERO SHADOWS //</span>
+        </div>
+    </div>
+
+    <main class="container">
+        <!-- 1. Hero Section -->
+        <header class="section hero" id="hero-section">
+            <span class="hero-tag">GRAPH COLORING ALGORITHM // O(V + E)</span>
+            <h1 class="hero-title">EXAM TIMETABLE <mark>SCHEDULING</mark></h1>
+            <p class="hero-caption">Greedy graph coloring using the Welch-Powell heuristic to assign conflict-free examination time slots with zero collisions.</p>
+            <nav class="hero-nav">
+                <a href="#input-section">[01] Input</a>
+                <a href="#schedule-section">[02] Schedule</a>
+                <a href="#graph-section">[03] Graph</a>
+                <a href="#stats-section">[04] Stats</a>
+                <a href="#steps-section">[05] Steps</a>
+            </nav>
+        </header>
+
+        <!-- Algorithm Visual Cards with -1deg and -2deg rotation -->
+        <div class="algorithm-card-row">
+            <div class="image-card rotate-neg-1">
+                <div class="image-card-media">
+                    <span class="card-tag">TOPOLOGY // 01</span>
+                    <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="180" fill="#FFFFFF"/>
+                        <line x1="80" y1="90" x2="200" y2="40" stroke="#000000" stroke-width="4"/>
+                        <line x1="200" y1="40" x2="320" y2="90" stroke="#000000" stroke-width="4"/>
+                        <line x1="80" y1="90" x2="200" y2="140" stroke="#000000" stroke-width="4"/>
+                        <line x1="200" y1="140" x2="320" y2="90" stroke="#000000" stroke-width="4"/>
+                        <circle cx="80" cy="90" r="28" fill="#FFE600" stroke="#000000" stroke-width="3"/>
+                        <text x="64" y="96" fill="#000" font-family="'Space Mono', monospace" font-size="12" font-weight="700">MATH</text>
+                        <circle cx="200" cy="40" r="28" fill="#FFFFFF" stroke="#000000" stroke-width="3"/>
+                        <text x="180" y="46" fill="#000" font-family="'Space Mono', monospace" font-size="12" font-weight="700">PHYS</text>
+                        <circle cx="320" cy="90" r="28" fill="#FFE600" stroke="#000000" stroke-width="3"/>
+                        <text x="306" y="96" fill="#000" font-family="'Space Mono', monospace" font-size="12" font-weight="700">BIO</text>
+                        <circle cx="200" cy="140" r="28" fill="#FFFFFF" stroke="#000000" stroke-width="3"/>
+                        <text x="184" y="146" fill="#000" font-family="'Space Mono', monospace" font-size="12" font-weight="700">CHEM</text>
+                    </svg>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">CONFLICT DETECTION</h3>
+                    <p class="card-text">Every exam is a vertex. A conflict edge is forged when any student is enrolled in both courses simultaneously.</p>
+                </div>
+            </div>
+
+            <div class="image-card rotate-neg-2">
+                <div class="image-card-media">
+                    <span class="card-tag">GREEDY COLORING // 02</span>
+                    <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="180" fill="#FFE600"/>
+                        <rect x="30" y="30" width="340" height="120" fill="#000000"/>
+                        <rect x="50" y="50" width="80" height="80" fill="#FFE600" stroke="#000" stroke-width="3"/>
+                        <text x="60" y="95" fill="#000" font-family="'Space Mono', monospace" font-size="14" font-weight="900">DEG(V)</text>
+                        <text x="150" y="85" fill="#FFF" font-family="'Space Mono', monospace" font-size="16" font-weight="700">&darr; SORT DESC</text>
+                        <text x="150" y="115" fill="#FFE600" font-family="'Space Mono', monospace" font-size="14" font-weight="700">&rarr; MIN VALID SLOT</text>
+                    </svg>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">WELCH-POWELL HEURISTIC</h3>
+                    <p class="card-text">Sort vertices by degree descending with lower ID tie-breaking, then sequentially assign the smallest free slot.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Input Section -->
+        <section class="section input-section" id="input-section">
+            <h2 class="section-title">Student Enrollments</h2>
+            <p class="section-desc">Enter one student per line in format <code>StudentID: Exam1, Exam2</code>, or upload a CSV file.</p>
+            
+            <div class="input-controls">
+                <textarea id="input-textarea" rows="7" placeholder="S1: Math, Physics&#10;S2: Math, Chemistry&#10;S3: Physics, Biology"></textarea>
+            </div>
+
+            <div class="button-bar">
+                <button type="button" id="btn-small" class="btn">Small sample</button>
+                <button type="button" id="btn-large" class="btn">Large sample</button>
+                <label class="btn file-btn">
+                    Upload CSV
+                    <input type="file" id="csv-upload" accept=".csv,text/plain" style="display:none;">
+                </label>
+                <button type="button" id="btn-generate" class="btn primary-btn">Generate schedule</button>
+            </div>
+
+            <div id="inline-message" class="inline-message"></div>
+        </section>
+
+        <!-- 3. Schedule Section -->
+        <section class="section" id="schedule-section">
+            <h2 class="section-title">Schedule</h2>
+            <p id="schedule-summary" class="section-desc">Run scheduler to view timetable.</p>
+            
+            <h3 class="subsection-title">Exam Timetable</h3>
+            <div class="table-wrap">
+                <table id="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Exam Name</th>
+                            <th>Assigned Time Slot</th>
+                        </tr>
+                    </thead>
+                    <tbody id="schedule-tbody">
+                        <tr><td colspan="3" class="empty-cell">No schedule generated yet.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="slot-schedule-wrap">
+                <h3 class="subsection-title">Slot-wise Schedule</h3>
+                <p class="section-desc">Exams grouped by assigned time slot.</p>
+                <div class="table-wrap">
+                    <table id="slot-schedule-table">
+                        <thead>
+                            <tr>
+                                <th style="min-width: 120px; white-space: nowrap;">Time Slot</th>
+                                <th>Scheduled Examinations</th>
+                            </tr>
+                        </thead>
+                        <tbody id="slot-schedule-tbody">
+                            <tr><td colspan="2" class="empty-cell">No schedule generated yet.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="student-schedule-wrap">
+                <div class="subsection-header-row">
+                    <h3 class="subsection-title">Student Timetables</h3>
+                    <button type="button" class="plain-toggle-btn" id="toggle-student-btn" aria-expanded="false">Show</button>
+                </div>
+                <div id="student-schedule-content" class="collapsible-content collapsed">
+                    <p class="section-desc">Personalized schedule for each enrolled student arranged in chronological slot order (confirming zero collisions).</p>
+                    <div class="table-wrap">
+                        <table id="student-schedule-table">
+                            <thead>
+                                <tr>
+                                    <th class="th-student-id">Student ID</th>
+                                    <th>Assigned Timetable (Chronological Slots)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="student-schedule-tbody">
+                                <tr><td colspan="2" class="empty-cell">No student timetables generated yet.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Graph Section -->
+        <section class="section" id="graph-section">
+            <h2 class="section-title">Conflict Graph</h2>
+            <p class="section-desc">Vertices represent distinct exams. An edge connects two exams if at least one student takes both.</p>
+            <div class="brutalist-card rotate-neg-1">
+                <div id="graph-container"></div>
+            </div>
+            <div id="graph-legend" class="graph-legend"></div>
+        </section>
+
+        <!-- 5. Statistics Section -->
+        <section class="section" id="stats-section">
+            <h2 class="section-title">Graph Statistics</h2>
+            <div class="table-wrap">
+                <table id="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Value</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stats-tbody">
+                        <tr><td>Exams (Vertices V)</td><td id="stat-vertices">0</td><td>Unique course examinations</td></tr>
+                        <tr><td>Conflicts (Edges E)</td><td id="stat-edges">0</td><td>Student pairwise course overlaps</td></tr>
+                        <tr><td>Maximum Degree (&Delta;)</td><td id="stat-degree">0</td><td>Highest number of conflicting courses for any single exam</td></tr>
+                        <tr><td>Theoretical Upper Bound</td><td id="stat-upper-bound">0</td><td>Greedy upper bound: &Delta; + 1 slots</td></tr>
+                        <tr><td>Slots Used (Welch-Powell)</td><td id="stat-slots-used">0</td><td>Exact slots assigned by greedy graph coloring</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 6. Validation Section -->
+        <section class="section" id="validation-section">
+            <h2 class="section-title">Schedule Validation</h2>
+            <div class="brutalist-card rotate-neg-1-5 validation-card">
+                <div id="validation-status" class="validation-status">Awaiting input...</div>
+                <div id="validation-details" class="validation-details"></div>
+            </div>
+        </section>
+
+        <!-- 7. Steps Section -->
+        <section class="section" id="steps-section">
+            <div class="section-header-row">
+                <h2 class="section-title">Welch-Powell Execution Steps</h2>
+                <button type="button" class="plain-toggle-btn" id="toggle-steps-btn" aria-expanded="false">Show</button>
+            </div>
+            <div id="steps-content" class="collapsible-content collapsed">
+                <p class="section-desc">Exams are colored sequentially after descending degree sort with lower ID tie-breaking.</p>
+                <div class="table-wrap">
+                    <table id="steps-table">
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Exam Name</th>
+                                <th>Degree</th>
+                                <th>Neighbor Slots Used</th>
+                                <th>Slot Chosen</th>
+                            </tr>
+                        </thead>
+                        <tbody id="steps-tbody">
+                            <tr><td colspan="5" class="empty-cell">No execution steps yet.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Vanilla Javascript Modules in dependency order -->
+    <script src="js/data.js"></script>
+    <script src="js/parser.js"></script>
+    <script src="js/graph.js"></script>
+    <script src="js/coloring.js"></script>
+    <script src="js/validate.js"></script>
+    <script src="js/visualize.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+

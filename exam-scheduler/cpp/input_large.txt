@@ -1,0 +1,43 @@
+S01: Data Structures, Algorithms, Discrete Mathematics
+S02: Algorithms, Computer Networks, Operating Systems
+S03: Data Structures, Database Systems, Web Development
+S04: Operating Systems, Computer Architecture, Compiler Design
+S05: Artificial Intelligence, Machine Learning, Linear Algebra
+S06: Machine Learning, Probability and Statistics, Algorithms
+S07: Computer Networks, Cyber Security, Operating Systems
+S08: Software Engineering, Database Systems, Web Development
+S09: Discrete Mathematics, Linear Algebra, Algorithms
+S10: Computer Architecture, Embedded Systems, Digital Logic
+S11: Compiler Design, Discrete Mathematics, Data Structures
+S12: Cyber Security, Computer Networks, Database Systems
+S13: Artificial Intelligence, Linear Algebra, Discrete Mathematics
+S14: Machine Learning, Database Systems, Algorithms
+S15: Software Engineering, Computer Networks, Operating Systems
+S16: Embedded Systems, Digital Logic, Computer Architecture
+S17: Web Development, Database Systems, Software Engineering
+S18: Probability and Statistics, Linear Algebra, Machine Learning
+S19: Cyber Security, Operating Systems, Computer Networks
+S20: Data Structures, Algorithms, Computer Architecture
+S21: Artificial Intelligence, Machine Learning, Computer Vision
+S22: Computer Vision, Machine Learning, Linear Algebra
+S23: Computer Vision, Artificial Intelligence, Algorithms
+S24: Web Development, Cyber Security, Software Engineering
+S25: Embedded Systems, Operating Systems, Computer Architecture
+S26: Compiler Design, Algorithms, Computer Architecture
+S27: Probability and Statistics, Discrete Mathematics, Algorithms
+S28: Digital Logic, Computer Architecture, Embedded Systems
+S29: Software Engineering, Web Development, Data Structures
+S30: Machine Learning, Artificial Intelligence, Probability and Statistics
+S31: Cyber Security, Database Systems, Operating Systems
+S32: Linear Algebra, Discrete Mathematics, Machine Learning
+S33: Computer Vision, Machine Learning, Data Structures
+S34: Data Structures, Operating Systems, Computer Networks
+S35: Algorithms, Artificial Intelligence, Linear Algebra
+S36: Database Systems, Software Engineering, Cyber Security
+S37: Compiler Design, Computer Architecture, Operating Systems
+S38: Probability and Statistics, Machine Learning, Linear Algebra
+S39: Embedded Systems, Digital Logic, Discrete Mathematics
+S40: Web Development, Computer Networks, Database Systems
+S41: Artificial Intelligence, Computer Vision, Machine Learning
+S42: Cyber Security, Software Engineering, Computer Networks
+
